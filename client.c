@@ -1,54 +1,41 @@
+#include "./libft/libft.h"
 #include <stdio.h>
-#include <stdlib.h>
 
-static char printing(char teste)
+static void *printing(char str, int pid)
 {
 	char bits[9];
-	int j;
-	char ret;
+	size_t j;
 
 	j = 8;
 	while (j)
 	{
-		bits[--j] = (teste % 2) + 48;
-		teste = teste / 2;
+		bits[--j] = (str % 2) + 48;
+		str = str / 2;
 	}
 	bits[8] = '\0';
-	//printf("%s\n", bits);
-	j = 8;
-	ret = 0;
-	if (bits[7] == '1')
-			ret = ret + 1;
-	if (bits[6] == '1')
-		ret = ret + 2;
-	if (bits[5] == '1')
-		ret = ret + 4;
-	if (bits[4] == '1')
-		ret = ret + 8;
-	if (bits[3] == '1')
-		ret = ret + 16;
-	if (bits[2] == '1')
-		ret = ret + 32;
-	if (bits[1] == '1')
-		ret = ret + 64;
-	if (bits[0] == '1')
-		ret = ret + 128;
-	//printf("%c\n", ret);
-	return (ret);
+	printf("%d\n", pid);
+	printf("%s\n", bits);
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
-	char str[6] = "teste";
-	int i = 0;
-	char ret;
+	int i;
+	size_t len;
+	char *sending;
+	int pid;
 
-	while (str[i] != '\0')
+	i = 0;
+	pid = ft_atoi(argv[1]);
+	len = ft_strlen(argv[2]);
+	sending = malloc(sizeof(char) * (len + 1));
+	sending[len + 1] = '\0';
+	sending = argv[2];
+	printf("%d\n", argc);
+	while (sending[i] != '\0')
 	{
-		ret = printing(str[i]);
+		printing(sending[i], pid);
 		i++;
-		printf("%c", ret);
 	}
-	printf("\n");	
+	printf("\n");
 	return (0);
 }
