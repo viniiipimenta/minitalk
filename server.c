@@ -1,16 +1,15 @@
-#include <unistd.h>
-#include <stdio.h>
+#include "./ft_printf/ft_printf.h"
+#include <signal.h>
 
 int main(void)
 {
-    /*int     adress;
-    char    printing;
-    char    bits[9];
+    int     pid;
+	char	printing;
+    char    bits[9] = "01110100\0";
 
-    bits[8] = '\0';
-    adress = getpid();
-    printf("%d\n", adress);
-
+    pid = getpid();
+    ft_printf("PID --> %d\n", pid);
+	printing = 0;
     if (bits[7] == '1')
 			printing = printing + 1;
 	if (bits[6] == '1')
@@ -27,6 +26,6 @@ int main(void)
 		printing = printing + 64;
 	if (bits[0] == '1')
 		printing = printing + 128;
-    printf("%s", printing);*/
+    ft_printf("%c\n", printing);
     return (0);
 }

@@ -13,9 +13,8 @@ static void send_signal(char *bits, int pid)
 		else
 			kill(pid, SIGUSR2);
 		i++;
+		usleep(80);
 	}
-	ft_printf("%d\n", pid);
-	ft_printf("%s\n", bits);
 }
 
 static void convert(char str, int pid)
