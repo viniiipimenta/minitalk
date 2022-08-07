@@ -1,6 +1,6 @@
-NAMEONE = client.out \
+NAMEONE = client \
 
-NAMETWO = server.out \
+NAMETWO = server \
 
 SRCSONE = client.c \
 		  
@@ -14,21 +14,21 @@ CFLAGS = -Wall -Wextra -Werror
 
 
 all:	
-		make -C ./libft
-		mv ./libft/libft.a .
-		cc $(CFLAGS) $(SRCSONE) libft.a -o $(NAMEONE)
-		cc $(CFLAGS) $(SRCSTWO) libft.a -o $(NAMETWO)
+		make -C ./ft_printf
+		mv ./ft_printf/libftprintf.a .
+		cc $(CFLAGS) $(SRCSONE) libftprintf.a -o $(NAMEONE)
+		cc $(CFLAGS) $(SRCSTWO) libftprintf.a -o $(NAMETWO)
 
 clean:
 		${RM} ${NAMEONE} ${NAMETWO}
-		${RM} libft.a
-		make -C ./libft clean
+		${RM} libftprintf.a
+		make -C ./ft_printf clean
 
 fclean:
 		make clean
-		make -C ./libft fclean
+		make -C ./ft_printf fclean
 
 re: 
-		make -C ./libft re
+		make -C ./ft_printf re
 
 .PHONY: all clean

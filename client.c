@@ -1,7 +1,24 @@
-#include "./libft/libft.h"
-#include <stdio.h>
+#include "./ft_printf/ft_printf.h"
+#include <signal.h>
 
-static void *printing(char str, int pid)
+static void send_signal(char *bits, int pid)
+{
+	int i;
+
+	i = 0;
+	while (bits[i])
+	{
+		if (bits[i] == 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		i++;
+	}
+	ft_printf("%d\n", pid);
+	ft_printf("%s\n", bits);
+}
+
+static void convert(char str, int pid)
 {
 	char bits[9];
 	size_t j;
@@ -13,29 +30,28 @@ static void *printing(char str, int pid)
 		str = str / 2;
 	}
 	bits[8] = '\0';
-	printf("%d\n", pid);
-	printf("%s\n", bits);
+	send_signal(bits, pid);
 }
 
 int main(int argc, char *argv[])
 {
 	int i;
 	size_t len;
-	char *sending;
+	char *str;
 	int pid;
 
+	if (argc < 3 || argc > 4)
+		return (0);
 	i = 0;
 	pid = ft_atoi(argv[1]);
 	len = ft_strlen(argv[2]);
-	sending = malloc(sizeof(char) * (len + 1));
-	sending[len + 1] = '\0';
-	sending = argv[2];
-	printf("%d\n", argc);
-	while (sending[i] != '\0')
+	str = malloc(sizeof(char) * (len + 1));
+	str = argv[2];
+	str[len + 1] = '\0';
+	while (str[i] != '\0')
 	{
-		printing(sending[i], pid);
+		convert(str[i], pid);
 		i++;
 	}
-	printf("\n");
 	return (0);
 }

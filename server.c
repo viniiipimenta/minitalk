@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    int     adress;
+    /*int     adress;
     char    printing;
     char    bits[9];
 
@@ -27,6 +27,6 @@ int main(void)
 		printing = printing + 64;
 	if (bits[0] == '1')
 		printing = printing + 128;
-    printf("%s", printing);
+    printf("%s", printing);*/
     return (0);
 }
