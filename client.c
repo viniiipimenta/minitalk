@@ -13,7 +13,7 @@ static void send_signal(char *bits, int pid)
 		else
 			kill(pid, SIGUSR2);
 		i++;
-		usleep(80);
+		usleep(5);
 	}
 }
 
