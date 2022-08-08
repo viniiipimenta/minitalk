@@ -19,8 +19,8 @@ static void send_signal(char *bits, int pid)
 
 static void convert(char str, int pid)
 {
-	char bits[9];
-	size_t j;
+	char	bits[9];
+	size_t	j;
 
 	j = 8;
 	while (j)
