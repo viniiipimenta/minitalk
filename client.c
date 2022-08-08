@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/08 13:58:36 by mpimenta          #+#    #+#             */
+/*   Updated: 2022/08/08 14:53:18 by mpimenta         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./ft_printf/ft_printf.h"
 #include <signal.h>
 
-static void send_signal(char *bits, int pid)
+void send_signal(char *bits, int pid)
 {
 	int i;
 
 	i = 0;
 	while (bits[i])
 	{
-		if (bits[i] == 1)
+		if (bits[i] == '1')
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
 		i++;
-		usleep(5);
+		usleep(200);
 	}
 }
 
-static void convert(char str, int pid)
+void convert(char str, int pid)
 {
 	char bits[9];
 	size_t j;
@@ -35,21 +47,15 @@ static void convert(char str, int pid)
 int main(int argc, char *argv[])
 {
 	int i;
-	size_t len;
-	char *str;
 	int pid;
 
-	if (argc < 3 || argc > 4)
+	if (argc != 3)
 		return (0);
 	i = 0;
 	pid = ft_atoi(argv[1]);
-	len = ft_strlen(argv[2]);
-	str = malloc(sizeof(char) * (len + 1));
-	str = argv[2];
-	str[len + 1] = '\0';
-	while (str[i] != '\0')
+	while (argv[2][i] != '\0')
 	{
-		convert(str[i], pid);
+		convert(argv[2][i], pid);
 		i++;
 	}
 	return (0);

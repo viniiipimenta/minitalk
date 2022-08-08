@@ -1,31 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/08 13:58:21 by mpimenta          #+#    #+#             */
+/*   Updated: 2022/08/08 14:56:57 by mpimenta         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./ft_printf/ft_printf.h"
 #include <signal.h>
+#include <stdlib.h>
+
+void handle_signal(int sig)
+{
+	static int			c;
+	static int	i;
+
+	c = 0;
+	i = 0;
+	if (sig == SIGUSR2)
+	{
+		c = c << 1;
+		i++;
+	}
+	else
+	{
+		c = c << 1;
+		c = c | 1;
+		i++;
+	}
+	if (i == 8)
+	{
+		write(1, &c, 1);
+		i = 0;
+	}
+
+}
 
 int main(void)
 {
-    int     pid;
-	char	printing;
-    char    bits[9] = "01110100\0";
+    int		pid;
 
-    pid = getpid();
-    ft_printf("PID --> %d\n", pid);
-	printing = 0;
-    if (bits[7] == '1')
-			printing = printing + 1;
-	if (bits[6] == '1')
-		printing = printing + 2;
-	if (bits[5] == '1')
-		printing = printing + 4;
-	if (bits[4] == '1')
-		printing = printing + 8;
-	if (bits[3] == '1')
-		printing = printing + 16;
-	if (bits[2] == '1')
-		printing = printing + 32;
-	if (bits[1] == '1')
-		printing = printing + 64;
-	if (bits[0] == '1')
-		printing = printing + 128;
-    ft_printf("%c\n", printing);
-    return (0);
+	pid = getpid();
+	ft_printf("%d\n", pid);
+	signal(SIGUSR1, handle_signal);
+	signal(SIGUSR2, handle_signal);
+	while (1)
+		pause();
+	return (0);
 }
