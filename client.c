@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:58:36 by mpimenta          #+#    #+#             */
-/*   Updated: 2022/08/08 15:03:57 by mpimenta         ###   ########.fr       */
+/*   Updated: 2022/08/10 10:41:24 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void convert(char str, int pid)
 	}
 	bits[8] = '\0';
 	send_signal(bits, pid);
+	free(bits);
 }
 
 int main(int argc, char *argv[])

@@ -6,7 +6,7 @@
 /*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:58:21 by mpimenta          #+#    #+#             */
-/*   Updated: 2022/08/10 10:24:03 by mpimenta         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:54:40 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 
 void handle_signal(int sig)
 {
-	static int			c;
+	static char	c;
 	static int	i;
 
 	if (!c)
-	{
 		c = 0;
-	}
 	if (sig == SIGUSR2)
 	{
 		c = c << 1;
@@ -39,7 +37,6 @@ void handle_signal(int sig)
 		write(1, &c, 1);
 		i = 0;
 	}
-
 }
 
 int main(void)
@@ -51,6 +48,6 @@ int main(void)
 	signal(SIGUSR1, handle_signal);
 	signal(SIGUSR2, handle_signal);
 	while (1)
-		pause();
+		sleep(1);
 	return (0);
 }
