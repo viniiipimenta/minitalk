@@ -1,28 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/08 13:58:36 by mpimenta          #+#    #+#             */
+/*   Updated: 2022/08/08 15:03:57 by mpimenta         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./ft_printf/ft_printf.h"
 #include <signal.h>
 
-static void send_signal(char *bits, int pid)
+void send_signal(char *bits, int pid)
 {
 	int i;
 
 	i = 0;
-	while (bits[i] != '\0')
+	while (bits[i])
 	{
 		if (bits[i] == '1')
 			kill(pid, SIGUSR1);
-		else if (bits[i] == '0')
+		else
 			kill(pid, SIGUSR2);
 		i++;
-		usleep(800);
+		usleep(200);
 	}
 }
 
-static void convert(char str, int pid)
+void convert(char str, int pid)
 {
-	char	bits[9];
-	size_t	j;
+	char *bits;
+	size_t j;
 
 	j = 8;
+	bits = malloc(9);
 	while (j)
 	{
 		bits[--j] = (str % 2) + 48;
@@ -37,7 +50,7 @@ int main(int argc, char *argv[])
 	int i;
 	int pid;
 
-	if (argc < 3 || argc > 4)
+	if (argc != 3)
 		return (0);
 	i = 0;
 	pid = ft_atoi(argv[1]);
