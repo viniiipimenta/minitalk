@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
+/*   By: mpimenta <mpimenta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:58:21 by mpimenta          #+#    #+#             */
-/*   Updated: 2022/08/10 12:54:40 by mpimenta         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:21:26 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void handle_signal(int sig)
 {
-	static char	c;
+	static int	c;
 	static int	i;
 
 	if (!c)
