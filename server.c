@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpimenta <mpimenta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpimenta <mpimenta@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/08 13:58:21 by mpimenta          #+#    #+#             */
-/*   Updated: 2022/08/10 19:21:26 by mpimenta         ###   ########.fr       */
+/*   Created: 2022/08/12 10:44:46 by mpimenta          #+#    #+#             */
+/*   Updated: 2022/08/12 10:45:53 by mpimenta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <signal.h>
 #include <stdlib.h>
 
-void handle_signal(int sig)
+void	handle_signal(int sig)
 {
 	static int	c;
 	static int	i;
@@ -39,9 +39,9 @@ void handle_signal(int sig)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-    int		pid;
+	int	pid;
 
 	pid = getpid();
 	ft_printf("PID --> %d\n", pid);
